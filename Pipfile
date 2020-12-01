@@ -5,12 +5,15 @@ verify_ssl = true
 
 [dev-packages]
 django-debug-toolbar = "*"
+autopep8 = "*"
 
 [packages]
 django = "*"
+django-admin-sortable2 = "*"
+django-colorfield = "*"
 django-environ = "*"
+django-richtextfield = "*"
 gunicorn = "*"
-psycopg2-binary = "*"
 
 [requires]
 python_version = "3.8"

@@ -16,13 +16,19 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
-from home.views import home
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('sudo/', admin.site.urls),
-    path('', home, name='homepage')
+    path('djrichtextfield/', include('djrichtextfield.urls')),
+    path('', TemplateView.as_view(template_name='index.html'))
 ]
 
 if settings.DEBUG:
+
     import debug_toolbar
-    urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
+    from django.conf.urls.static import static
+
+    urlpatterns += [
+        path('__debug__/', include(debug_toolbar.urls))
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
