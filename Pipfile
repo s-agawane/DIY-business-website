@@ -15,6 +15,7 @@ django-environ = "*"
 django-richtextfield = "*"
 gunicorn = "*"
 django-admin-interface = "*"
+mysqlclient = "*"
 
 [requires]
 python_version = "3.8"
