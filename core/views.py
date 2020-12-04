@@ -1,6 +1,7 @@
-from core.models import (About, Carousel, Contact, Package, Portfolio, Service,
-                         Social, WebsiteConfig)
 from django.views.generic import TemplateView
+
+from core.models import (About, Carousel, Contact, Package, Portfolio, Service,
+                         Social, Testimonial, WebsiteConfig)
 
 
 class SiteView(TemplateView):
@@ -17,5 +18,6 @@ class SiteView(TemplateView):
             'packages': Package.objects.filter(is_published=True).prefetch_related('features'),
             'carousels': Carousel.objects.filter(is_published=True),
             'services': Service.objects.filter(is_published=True),
+            'testimonials': Testimonial.objects.filter(is_published=True),
         }
         return context

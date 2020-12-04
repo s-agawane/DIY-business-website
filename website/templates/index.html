@@ -17,6 +17,12 @@
       type="image/png"
     />
 
+    <!--====== Animate CSS ======-->
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+    />
+
     <!--====== Magnific Popup CSS ======-->
     <link
       rel="stylesheet"
@@ -26,12 +32,7 @@
     />
 
     <!--====== Slick CSS ======-->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
-      integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
     <!--====== Line Icons CSS ======-->
     <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet" />
@@ -184,8 +185,10 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="slider-content">
-                      <h1 class="title">{{ carousel.title.capitalize }}</h1>
+                      <h1 class="title wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.2s">{{ carousel.title.capitalize }}</h1>
+                      <span class="wow fadeInUp" data-wow-duration="1.3s" data-wow-delay="0.5s">
                         {{ carousel.description|default_if_none:""|safe }}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -235,6 +238,7 @@
           <div class="row justify-content-center">
             <div class="col-lg-6 col-md-10">
               <div class="section-title text-center pb-10">
+                <div class="line m-auto"></div>
                 <h3 class="title">Our Services</h3>
                   {{ websiteconfig.services_description|default_if_none:""|safe }}
               </div>
@@ -245,7 +249,7 @@
           <div class="row justify-content-center">
             {% for service in services %}
             <div class="col-lg-4 col-md-7 col-sm-9">
-              <div class="single-features mt-40">
+              <div class="single-features mt-40 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
                 <div class="features-title-icon d-flex justify-content-between">
                   <h4 class="features-title">
                     <a href="javascript:void(0);">{{ service.title }}</a>
@@ -290,6 +294,7 @@
           <div class="row justify-content-center">
             <div class="col-lg-6 col-md-10">
               <div class="section-title text-center pb-10">
+                <div class="line m-auto"></div>
                 <h3 class="title">Featured Works</h3>
                   {{ websiteconfig.gallery_description|default_if_none:""|safe }}
               </div>
@@ -379,6 +384,7 @@
           <div class="row justify-content-center">
             <div class="col-lg-6 col-md-10">
               <div class="section-title text-center pb-25">
+                <div class="line m-auto"></div>
                 <h3 class="title">Pricing</h3>
                 {{ websiteconfig.pricing_description }}
               </div>
@@ -388,7 +394,7 @@
           <!-- row -->
           <div class="row justify-content-center">
             {% for package in packages %}
-              <div class="col-lg-4 col-md-7 col-sm-9">
+              <div class="col-lg-4 col-md-7 col-sm-9 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
                 <div class="pricing-style">
                   {% if package.image %}
                     <div class="pricing-icon text-center">
@@ -426,73 +432,59 @@
 
     <!--====== ABOUT PART START ======-->
 
-    {% if about %}
+    {% if about or testimonials|length > 0 %}
       <section id="about" class="testimonial-area">
         <div class="container">
-          <div class="row justify-content-between">
-            <div class="col-xl-5 col-lg-6">
-              <div class="testimonial-left-content mt-45">
-                <h4 class="title">
-                  About Us
-                </h4>
-                <ul class="testimonial-line">
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ul>
-                {{ about.description|default_if_none:""|safe }}
+          <div class="row justify-content-center">
+              <div class="col-lg-5">
+                  <div class="section-title text-center pb-40">
+                      <div class="line m-auto"></div>
+                      <h3 class="title">About Us</h3>
+                      {{ about.description|default_if_none:""|safe }}
+                  </div> <!-- section title -->
               </div>
-              <!-- testimonial left content -->
-            </div>
-            <div class="col-lg-6">
-              <div class="testimonial-right-content mt-50">
-                <div class="quota">
-                  <i class="lni lni-quotation"></i>
-                </div>
-                <div class="testimonial-content-wrapper testimonial-active">
+          </div> <!-- row -->
+          <div class="row testimonial-active wow fadeInUpBig" data-wow-duration="1s" data-wow-delay="0.8s">
+            {% for testimonial in testimonials %}
+              <div class="col-lg-4">
                   <div class="single-testimonial">
-                    <div class="testimonial-text">
-                      <p class="text">
-                        “Praesent scelerisque, odio eu fermentum malesuada, nisi
-                        arcu volutpat nisl, sit amet convallis nunc turp.”
-                      </p>
-                    </div>
-                    <div class="testimonial-author d-sm-flex justify-content-between">
-                      <div class="author-info d-flex align-items-center">
-                        <div class="author-image">
-                          <img
-                            src="{% static 'assets/images/author-1.jpg' %}"
-                            alt="author"
-                          />
-                        </div>
-                        <div class="author-name media-body">
-                          <h5 class="name">Mr. Jems Bond</h5>
-                          <span class="sub-title">CEO Mbuild Firm</span>
-                        </div>
+                      <div class="testimonial-review d-flex align-items-center justify-content-between">
+                          <div class="quota">
+                              <i class="lni lni-quotation"></i>
+                          </div>
+                          <div class="star">
+                              <ul>
+                                  <li><i class="lni lni-star-filled"></i></li>
+                                  <li><i class="lni lni-star-filled"></i></li>
+                                  <li><i class="lni lni-star-filled"></i></li>
+                                  <li><i class="lni lni-star-filled"></i></li>
+                                  <li><i class="lni lni-star-filled"></i></li>
+                              </ul>
+                          </div>
                       </div>
-                      <div class="author-review">
-                        <ul class="star">
-                          <li><i class="lni lni-star-filled"></i></li>
-                          <li><i class="lni lni-star-filled"></i></li>
-                          <li><i class="lni lni-star-filled"></i></li>
-                          <li><i class="lni lni-star-filled"></i></li>
-                          <li><i class="lni lni-star-filled"></i></li>
-                        </ul>
-                        <span class="review">( 7 Reviews )</span>
+                      <div class="testimonial-text">
+                        {{ testimonial.text|safe }}
                       </div>
-                    </div>
-                  </div>
-                  <!-- single testimonial -->
-                </div>
-                <!-- testimonial content wrapper -->
+                      <div class="testimonial-author d-flex align-items-center">
+                          <div class="author-image">
+                            {% if testimonial.user_profile_pic %}
+                              <img class="shape" src="assets/images/textimonial-shape.svg" alt="shape">
+                              <img class="author" src="{{ testimonial.user_profile_pic }}" alt="author">
+                            {% else %}
+                              &nbsp;
+                              &nbsp;
+                            {% endif %}
+                          </div>
+                          <div class="author-content media-body">
+                              <h6 class="holder-name">{{ testimonial.username }}</h6>
+                                {{ testimonial.user_designation|default_if_none:"" }}
+                          </div>
+                      </div>
+                  </div> <!-- single testimonial -->
               </div>
-              <!-- testimonial right content -->
-            </div>
-          </div>
-          <!-- row -->
-        </div>
-        <!-- container -->
+            {% endfor %}
+          </div> <!-- row -->
+        </div> <!-- container -->
       </section>
     {% endif %}
 
@@ -507,16 +499,18 @@
           <div class="row justify-content-center">
             <div class="col-lg-6 col-md-10">
               <div class="section-title text-center pb-30">
+                <div class="line m-auto"></div>
                 <h3 class="title">Contact Us</h3>
                   {{ contact.description|default_if_none:""|safe }}
               </div>
               <!-- section title -->
             </div>
           </div>
-          {% if contact.show_maps and websiteconfig.google_api_key and websiteconfig.google_place_id %}
+          {% if contact.maps_src %}
           <div class="row">
             <div class="col-lg-12">
                 <div class="contact-map mt-30">
+                    <iframe id="gmap_canvas" src="{{ contact.maps_src }}" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                 </div> <!-- row -->
             </div>
           </div> <!-- row -->
@@ -531,7 +525,7 @@
         <div class="container">
           <div class="row">
               <div class="col-lg-6">
-                <div class="contact-wrapper form-style-two pt-40">
+                <div class="contact-wrapper form-style-two pt-40 wow fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
                   <h4 class="contact-title pb-10">
                     <i class="lni lni-envelope"></i> Leave <span>A Message.</span>
                   </h4>
@@ -587,7 +581,7 @@
                 </div>
                 <!-- contact wrapper form -->
               </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.5s">
               <div class="pt-40 footer-logo text-center">
                 <a class="mt-30" href="index.html">
                   {% if websiteconfig.logo %}
@@ -717,6 +711,7 @@
       integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
       crossorigin="anonymous"
     ></script>
+
     <script src="{% static 'assets/js/vendor/modernizr-3.7.1.min.js' %}"></script>
 
     <!--====== Bootstrap js ======-->
@@ -734,11 +729,7 @@
     ></script>
 
     <!--====== Slick js ======-->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
-      integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
-      crossorigin="anonymous"
-    ></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
     <!--====== Magnific Popup js ======-->
     <script
@@ -754,6 +745,9 @@
     <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 
+    <!--====== WOW js ======-->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+
     <!--====== Scrolling Nav js ======-->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"
@@ -761,37 +755,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="{% static 'assets/js/scrolling-nav.js' %}"></script>
-
-    <div id="google-reviews"></div>
-
-    <!--====== Google api js ======-->
-    {% if websiteconfig.google_api_key and websiteconfig.google_place_id %}
-      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key={{ websiteconfig.google_api_key }}"></script>
-      <!-- <script>
-        $(document).ready(function($) {
-          if ($("#google-reviews").length == 0) {
-            return
-          }
-          // Find a placeID via https://developers.google.com/places/place-id
-          $("#google-reviews").googlePlaces({
-            placeId: '{{ websiteconfig.google_place_id }}',
-            // the following params are optional (default values)
-            header: "<h3>Google Reviews</h3>", // html/text over Reviews
-            footer: '', // html/text under Reviews block
-            maxRows: 5, // max 5 rows of reviews to be displayed
-            minRating: 4, // minimum rating of reviews to be displayed
-            months: ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"],
-            textBreakLength: "90", // length before a review box is set to max width
-            shortenNames: true, // example: "Max Mustermann" -> "Max M."",
-            moreReviewsButtonUrl: '', // url to Google Place reviews popup
-            moreReviewsButtonLabel: 'Show More Reviews',
-            writeReviewButtonUrl: '', // url to Google Place write review popup
-            writeReviewButtonLabel: 'Write New Review',
-            showProfilePicture: true
-          });
-        });
-        </script> -->
-    {% endif %}
 
     <!--====== Main js ======-->
     <script src="{% static 'assets/js/main.js' %}"></script>
