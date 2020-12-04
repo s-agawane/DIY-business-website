@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from core.models import (About, Carousel, Contact, ContactEmail, ContactNumber,
-                         Portfolio, PortfolioImage, Product, ProductFeature,
+                         Portfolio, PortfolioImage, Package, PackageFeature,
                          Service, Social, WebsiteConfig)
 
 
@@ -26,7 +26,7 @@ class ContactAdmin(admin.ModelAdmin):
 
 
 class ProductFeatureAdmin(admin.TabularInline):
-    model = ProductFeature
+    model = PackageFeature
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -40,4 +40,4 @@ admin.site.register(About)
 admin.site.register(Social)
 admin.site.register(Portfolio, PortfolioAdmin)
 admin.site.register(Contact, ContactAdmin)
-admin.site.register(Product, ProductAdmin)
+admin.site.register(Package, ProductAdmin)

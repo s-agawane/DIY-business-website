@@ -96,6 +96,7 @@ $(function () {
     var $grid = $(".grid").isotope({
       // options
       transitionDuration: "1s",
+      filter: $('.portfolio-menu > ul > li.active').attr("data-filter")
     });
 
     // filter items on button click

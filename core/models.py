@@ -1,5 +1,6 @@
 from colorfield.fields import ColorField
 from django.db import models
+from django.utils.html import format_html
 from djrichtextfield.models import RichTextField
 
 
@@ -14,6 +15,10 @@ class WebsiteConfig(models.Model):
     logo = models.FileField(
         help_text="Website Logo",
         upload_to='assets/logo/'
+    )
+    favicon = models.FileField(
+        help_text="Website favicon",
+        upload_to='assets/favicon/'
     )
     services_description = RichTextField(
         blank=True,
@@ -30,6 +35,22 @@ class WebsiteConfig(models.Model):
         null=True,
         help_text="Copyright Information"
     )
+    show_all_portfolios = models.BooleanField(
+        default=True,
+        help_text="Show all photos in gallery section ?"
+    )
+    google_api_key = models.CharField(
+        max_length=256,
+        blank=True,
+        null=True,
+        help_text="Google API key. Get one from https://console.developers.google.com/apis/"
+    )
+    google_place_id = models.CharField(
+        max_length=256,
+        blank=True,
+        null=True,
+        help_text="Google unique placeId. Get from https://developers.google.com/places/place-id"
+    )
     is_active = models.BooleanField(
         default=True
     )
@@ -44,9 +65,8 @@ class WebsiteConfig(models.Model):
         super(WebsiteConfig, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return '{} {}'.format(
-            self.title,
-            self.copyright_info
+        return '{}'.format(
+            self.title
         )
 
     class Meta:
@@ -80,9 +100,8 @@ class Carousel(models.Model):
     )
 
     def __str__(self) -> str:
-        return '{} - {}'.format(
-            self.title,
-            self.description
+        return '{}'.format(
+            self.title
         )
 
     class Meta:
@@ -120,9 +139,8 @@ class Service(models.Model):
     )
 
     def __str__(self) -> str:
-        return '{} - {}'.format(
-            self.title,
-            self.description
+        return '{}'.format(
+            self.title
         )
 
     class Meta:
@@ -183,11 +201,9 @@ class Contact(models.Model):
     address = RichTextField(
         help_text="Elizabeth St, Melbourne 1202 Australia."
     )
-    maps_src = models.URLField(
-        blank=True,
-        null=True,
-        max_length=256,
-        help_text="Url for map embed. e.g. https://maps.google.com/maps?q=Mission%20District%2C%20San%20Francisco%2C%20CA%2C%20USA&t=&z=13&ie=UTF8&iwloc=&output=embed",
+    show_maps = models.BooleanField(
+        default=False,
+        help_text="Show google maps with location on website ? (Google API key and placeId required)"
     )
     description = RichTextField(
         blank=True,
@@ -219,8 +235,10 @@ class Contact(models.Model):
         super(Contact, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return '{}'.format(
-            self.address
+        return format_html(
+            '{}'.format(
+                self.address
+            )
         )
 
     class Meta:
@@ -242,10 +260,7 @@ class ContactEmail(models.Model):
     )
 
     def __str__(self) -> str:
-        return '{} - ({})'.format(
-            self.email,
-            self.contact.__str__()
-        )
+        return self.email
 
     class Meta:
         db_table = "tbl_contact_emails"
@@ -267,10 +282,7 @@ class ContactNumber(models.Model):
     )
 
     def __str__(self) -> str:
-        return '{} - ({})'.format(
-            self.number,
-            self.contact.__str__()
-        )
+        return self.number
 
     class Meta:
         db_table = "tbl_contact_numbers"
@@ -300,7 +312,7 @@ class About(models.Model):
 
     def __str__(self) -> str:
         return '{}'.format(
-            self.description
+            format_html(self.description)
         )
 
     class Meta:
@@ -352,21 +364,23 @@ class Social(models.Model):
         db_table = "tbl_social_accounts"
 
 
-class Product(models.Model):
+class Package(models.Model):
     """
-    Product
+    Package Information & Pricing
     """
     title = models.CharField(
         max_length=256,
         help_text="Product Title"
     )
-    price = models.CharField(
+    original_price = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        help_text="Strike through price"
+    )
+    discount_price = models.CharField(
         max_length=50,
         help_text="Product Price"
-    )
-    price_text = models.CharField(
-        max_length=50,
-        help_text="After price text"
     )
     is_published = models.BooleanField(
         db_index=True,
@@ -374,29 +388,28 @@ class Product(models.Model):
     )
 
     def __str__(self) -> str:
-        return '{} - {}{}'.format(
+        return '{} - {}'.format(
             self.title,
-            self.price,
-            self.price_text
+            self.original_price
         )
 
     class Meta:
-        db_table = "tbl_products"
+        db_table = "tbl_packages"
 
 
-class ProductFeature(models.Model):
+class PackageFeature(models.Model):
     """
-    Product Feature
+    Package Feature
     """
     product = models.ForeignKey(
-        Product,
+        Package,
         related_name='features',
         on_delete=models.CASCADE,
-        help_text="Choose Product"
+        help_text="Choose Package"
     )
     title = models.CharField(
         max_length=256,
-        help_text="Product Feature Title"
+        help_text="Package Feature Title"
     )
 
     def __str__(self) -> str:
@@ -406,4 +419,4 @@ class ProductFeature(models.Model):
         )
 
     class Meta:
-        db_table = "tbl_product_features"
+        db_table = "tbl_package_features"

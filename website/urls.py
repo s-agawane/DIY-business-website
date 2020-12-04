@@ -16,12 +16,13 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
-from django.views.generic import TemplateView
+
+from core.views import SiteView
 
 urlpatterns = [
     path('sudo/', admin.site.urls),
     path('djrichtextfield/', include('djrichtextfield.urls')),
-    path('', TemplateView.as_view(template_name='index.html'))
+    path('', SiteView.as_view(), name='site')
 ]
 
 if settings.DEBUG:

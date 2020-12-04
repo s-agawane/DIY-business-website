@@ -3354,12 +3354,13 @@ p {
 /*===== features TWO =====*/
 .features-area {
   background-color: #f4f6f7;
-  padding-top: 120px;
-  padding-bottom: 130px;
+  padding-top: 60px;
+  padding-bottom: 40px;
 }
 
 .single-features {
-  padding: 40px 20px 52px;
+  border-radius: 15px;
+  padding: 30px 20px 20px 30px;
   background-color: #fff;
 }
 .single-features .features-title-icon .features-title a {
@@ -3608,16 +3609,26 @@ p {
 }
 .pricing-style .pricing-header .month .price {
   font-size: 36px;
+  vertical-align: middle;
   font-weight: 600;
   line-height: 45px;
   color: #fff;
   margin-top: 8px;
+}
+.pricing-style .pricing-header .month .strike {
+  font-size: 20px;
+  vertical-align: middle;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: line-through;
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .pricing-style .pricing-header .month .price {
     font-size: 24px;
     margin-top: 32px;
     line-height: 30px;
+  }
+  .pricing-style .pricing-header .month .strike {
+    font-size: 10px;
   }
 }
 .pricing-style .pricing-list {

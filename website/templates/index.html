@@ -13,7 +13,7 @@
     <!--====== Favicon Icon ======-->
     <link
       rel="shortcut icon"
-      href="{% static 'assets/images/favicon.png' %}"
+      href="{{ websiteconfig.favicon.url }}"
       type="image/png"
     />
 
@@ -124,9 +124,14 @@
                       <a class="page-scroll" href="#portfolio">Gallery</a>
                     </li>
                   {% endif %}
-                  {% if products|length > 0 %}
+                  {% if packages|length > 0 %}
                     <li class="nav-item">
                       <a class="page-scroll" href="#pricing">Pricing</a>
+                    </li>
+                  {% endif %}
+                  {% if products|length > 0 %}
+                    <li class="nav-item">
+                      <a class="page-scroll" href="#products">Products</a>
                     </li>
                   {% endif %}
                   {% if about %}
@@ -296,12 +301,24 @@
             <div class="col-lg-3 col-md-3">
               <div class="portfolio-menu text-center mt-50">
                 <ul>
-                  <li data-filter="*" class="active">ALL WORK</li>
                   {% for portfolio in portfolios %}
                   {% with y=forloop.counter|stringformat:"s" %}
-                  <li data-filter=".{{ loop|add:y }}-4">
-                    {{ portfolio.title|upper }}
-                  </li>
+                    {% if forloop.first %}
+                      {% if websiteconfig.show_all_portfolios %}
+                        <li data-filter="*" class="active">ALL WORK</li>
+                        <li data-filter=".{{ 'loop'|add:y }}-4">
+                          {{ portfolio.title|upper }}
+                        </li>
+                      {% else %}
+                        <li data-filter=".{{ 'loop'|add:y }}-4" class="active">
+                          {{ portfolio.title|upper }}
+                        </li>
+                      {% endif %}
+                    {% else %}
+                      <li data-filter=".{{ 'loop'|add:y }}-4">
+                        {{ portfolio.title|upper }}
+                      </li>
+                    {% endif %}
                   {% endwith %}
                   {% endfor %}
                 </ul>
@@ -313,7 +330,7 @@
                 {% for portfolio in portfolios %}
                 {% with y=forloop.counter|stringformat:"s" %}
                 {% for portfolio_image in portfolio.images.all %}
-                <div class="col-lg-4 col-sm-6 {{ loop|add:y }}-4">
+                <div class="col-lg-4 col-sm-6 {{ 'loop'|add:y }}-4">
                   <div class="single-portfolio">
                     <div class="portfolio-image">
                       <img src="{{ portfolio_image.image.url }}" alt="" />
@@ -356,7 +373,7 @@
 
     <!--====== PRINICNG START ======-->
 
-    {% if products|length > 0 %}
+    {% if packages|length > 0 %}
       <section id="pricing" class="pricing-area">
         <div class="container">
           <div class="row justify-content-center">
@@ -370,21 +387,24 @@
           </div>
           <!-- row -->
           <div class="row justify-content-center">
-            {% for product in products %}
+            {% for package in packages %}
               <div class="col-lg-4 col-md-7 col-sm-9">
                 <div class="pricing-style">
-                  {% if product.image %}
+                  {% if package.image %}
                     <div class="pricing-icon text-center">
-                      <img src="{{ product.image.url }}" alt="" />
+                      <img src="{{ package.image.url }}" alt="" />
                     </div>
                   {% endif %}
                   <div class="pricing-header text-center">
-                    <h5 class="sub-title">{{ product.title }}</h5>
-                    <p class="month"><span class="price">{{ product.price }}</span>{{ product.price_text }}</p>
+                    <h5 class="sub-title">{{ package.title }}</h5>
+                    <p class="month">
+                      <span class="price">{{ package.discount_price }}</span>
+                      <span class="price strike">{{ package.original_price|default_if_none:"" }}</span>
+                    </p>
                   </div>
                   <div class="pricing-list">
                     <ul>
-                      {% for feature in product.features.all %}
+                      {% for feature in package.features.all %}
                         <li>
                           <i class="lni lni-checkmark-circle"></i> {{ feature.title }}
                         </li>
@@ -493,11 +513,10 @@
               <!-- section title -->
             </div>
           </div>
-          {% if contact.maps_src %}
+          {% if contact.show_maps and websiteconfig.google_api_key and websiteconfig.google_place_id %}
           <div class="row">
             <div class="col-lg-12">
                 <div class="contact-map mt-30">
-                    <iframe id="gmap_canvas" src="{{ contact.maps_src }}" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                 </div> <!-- row -->
             </div>
           </div> <!-- row -->
@@ -593,7 +612,7 @@
                   </div>
                   <div class="contact-info-content media-body">
                     {% for email in contact.emails.all %}
-                    <p>{{ email.email }}</p>
+                    <p>{{ email }}</p>
                     {% endfor %}
                   </div>
                 </div>
@@ -604,13 +623,13 @@
                   </div>
                   <div class="contact-info-content media-body">
                     {% for number in contact.numbers.all %}
-                    <p>{{ number.number }}</p>
+                    <p>{{ number }}</p>
                     {% endfor %}
                   </div>
                 </div>
                   <!-- single contact info -->
                 </div>
-              <ul class="social text-center mt-60">
+              <ul class="social text-center mt-20">
                 {% if social.facebook %}
                 <li>
                   <a target="_blank" href="{{ social.facebook }}">
@@ -641,7 +660,7 @@
                 {% endif %}
               </ul>
               <!-- social -->
-              <div class="copyright text-center mt-35">
+              <div class="copyright text-center mt-10">
                 {{ websiteconfig.copyright_info|default_if_none:''|safe }}
               </div>
               <!--  copyright -->
@@ -742,6 +761,37 @@
       crossorigin="anonymous"
     ></script>
     <script src="{% static 'assets/js/scrolling-nav.js' %}"></script>
+
+    <div id="google-reviews"></div>
+
+    <!--====== Google api js ======-->
+    {% if websiteconfig.google_api_key and websiteconfig.google_place_id %}
+      <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key={{ websiteconfig.google_api_key }}"></script>
+      <!-- <script>
+        $(document).ready(function($) {
+          if ($("#google-reviews").length == 0) {
+            return
+          }
+          // Find a placeID via https://developers.google.com/places/place-id
+          $("#google-reviews").googlePlaces({
+            placeId: '{{ websiteconfig.google_place_id }}',
+            // the following params are optional (default values)
+            header: "<h3>Google Reviews</h3>", // html/text over Reviews
+            footer: '', // html/text under Reviews block
+            maxRows: 5, // max 5 rows of reviews to be displayed
+            minRating: 4, // minimum rating of reviews to be displayed
+            months: ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"],
+            textBreakLength: "90", // length before a review box is set to max width
+            shortenNames: true, // example: "Max Mustermann" -> "Max M."",
+            moreReviewsButtonUrl: '', // url to Google Place reviews popup
+            moreReviewsButtonLabel: 'Show More Reviews',
+            writeReviewButtonUrl: '', // url to Google Place write review popup
+            writeReviewButtonLabel: 'Write New Review',
+            showProfilePicture: true
+          });
+        });
+        </script> -->
+    {% endif %}
 
     <!--====== Main js ======-->
     <script src="{% static 'assets/js/main.js' %}"></script>
