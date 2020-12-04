@@ -468,8 +468,8 @@
                       <div class="testimonial-author d-flex align-items-center">
                           <div class="author-image">
                             {% if testimonial.user_profile_pic %}
-                              <img class="shape" src="assets/images/textimonial-shape.svg" alt="shape">
-                              <img class="author" src="{{ testimonial.user_profile_pic }}" alt="author">
+                              <img class="shape" src="{% static 'assets/images/textimonial-shape.svg' %}" alt="shape">
+                              <img class="author" src="{{ testimonial.user_profile_pic.url }}" alt="author">
                             {% else %}
                               &nbsp;
                               &nbsp;
