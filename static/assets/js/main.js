@@ -1,12 +1,6 @@
 $(function () {
   "use strict";
 
-  //===== Prealoder
-
-  $(window).on("load", function (event) {
-    $(".preloader").delay(500).fadeOut(500);
-  });
-
   //===== Section Menu Active
 
   var scrollLink = $(".page-scroll");
@@ -96,7 +90,7 @@ $(function () {
     var $grid = $(".grid").isotope({
       // options
       transitionDuration: "1s",
-      filter: $('.portfolio-menu > ul > li.active').attr("data-filter")
+      filter: $(".portfolio-menu > ul > li.active").attr("data-filter"),
     });
 
     // filter items on button click
@@ -169,4 +163,10 @@ $(function () {
   });
 
   //=====
+});
+
+//===== Prealoder
+
+$(window).on("load", function (event) {
+  $(".preloader").delay(500).fadeOut(500);
 });
