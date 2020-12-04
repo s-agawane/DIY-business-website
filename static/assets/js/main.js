@@ -112,15 +112,15 @@ $(function () {
   //===== slick Testimonial Four
 
   $(".testimonial-active").slick({
-    dots: false,
-    arrows: true,
-    prevArrow: '<span class="prev"><i class="lni lni-arrow-left"></i></span>',
-    nextArrow: '<span class="next"><i class="lni lni-arrow-right"></i></span>',
+    dots: true,
+    arrows: false,
+    centerMode: true,
+    centerPadding: "0",
+    slidesToShow: 3,
     infinite: true,
     autoplay: true,
     autoplaySpeed: 5000,
-    speed: 800,
-    slidesToShow: 1,
+    speed: 800
   });
 
   //====== Magnific Popup
@@ -163,6 +163,10 @@ $(function () {
   });
 
   //=====
+
+  //=====  WOW active
+
+  new WOW().init();
 });
 
 //===== Prealoder

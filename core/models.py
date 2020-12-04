@@ -39,18 +39,6 @@ class WebsiteConfig(models.Model):
         default=True,
         help_text="Show all photos in gallery section ?"
     )
-    google_api_key = models.CharField(
-        max_length=256,
-        blank=True,
-        null=True,
-        help_text="Google API key. Get one from https://console.developers.google.com/apis/"
-    )
-    google_place_id = models.CharField(
-        max_length=256,
-        blank=True,
-        null=True,
-        help_text="Google unique placeId. Get from https://developers.google.com/places/place-id"
-    )
     is_active = models.BooleanField(
         default=True
     )
@@ -201,9 +189,11 @@ class Contact(models.Model):
     address = RichTextField(
         help_text="Elizabeth St, Melbourne 1202 Australia."
     )
-    show_maps = models.BooleanField(
-        default=False,
-        help_text="Show google maps with location on website ? (Google API key and placeId required)"
+    maps_src = models.CharField(
+        blank=True,
+        null=True,
+        max_length=256,
+        help_text="iframe src link from google maps embed"
     )
     description = RichTextField(
         blank=True,
@@ -372,6 +362,12 @@ class Package(models.Model):
         max_length=256,
         help_text="Product Title"
     )
+    image = models.FileField(
+        blank=True,
+        null=True,
+        help_text="Package Image",
+        upload_to='assets/images/package/'
+    )
     original_price = models.CharField(
         max_length=50,
         blank=True,
@@ -420,3 +416,38 @@ class PackageFeature(models.Model):
 
     class Meta:
         db_table = "tbl_package_features"
+
+
+class Testimonial(models.Model):
+    """
+    Testimonial Information
+    """
+    text = RichTextField(
+        help_text="Testimonial Text"
+    )
+    user_profile_pic = models.FileField(
+        blank=True,
+        null=True,
+        help_text="Package Image",
+        upload_to='assets/images/testimonial/user/'
+    )
+    username = models.CharField(
+        max_length=50,
+        help_text="John Ivy"
+    )
+    user_designation = models.CharField(
+        blank=True,
+        null=True,
+        max_length=50,
+        help_text="CEO, SpaceX"
+    )
+    is_published = models.BooleanField(
+        db_index=True,
+        default=False
+    )
+
+    def __str__(self) -> str:
+        return self.username
+
+    class Meta:
+        db_table = "tbl_testimonials"
