@@ -14,6 +14,7 @@ django-colorfield = "*"
 django-environ = "*"
 django-richtextfield = "*"
 gunicorn = "*"
+django-admin-interface = "*"
 
 [requires]
 python_version = "3.8"
