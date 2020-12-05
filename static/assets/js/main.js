@@ -111,16 +111,45 @@ $(function () {
 
   //===== slick Testimonial Four
 
+  //===== testimonial active
+
   $(".testimonial-active").slick({
     dots: true,
+    speed: 800,
     arrows: false,
+    autoplay: true,
+    autoplaySpeed: 1000,
     centerMode: true,
     centerPadding: "0",
     slidesToShow: 3,
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    speed: 800
+    slidesToScroll: 4,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 2,
+          centerMode: false,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   });
 
   //====== Magnific Popup
