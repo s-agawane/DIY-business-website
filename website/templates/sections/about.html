@@ -1,0 +1,68 @@
+{% load static %}
+<section id="about" class="testimonial-area">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <div class="section-title text-center pb-40">
+          <div class="line m-auto"></div>
+          <h3 class="title">About Us</h3>
+          {{ about.description|default_if_none:""|safe }}
+        </div>
+        <!-- section title -->
+      </div>
+    </div>
+    <!-- row -->
+    <div
+      class="row testimonial-active wow fadeInUpBig"
+      data-wow-duration="1s"
+      data-wow-delay="0.8s"
+    >
+      {% for testimonial in testimonials %}
+      <div class="col-lg-4">
+        <div class="single-testimonial">
+          <div
+            class="testimonial-review d-flex align-items-center justify-content-between"
+          >
+            <div class="quota">
+              <i class="lni lni-quotation"></i>
+            </div>
+            <div class="star">
+              <ul>
+                <li><i class="lni lni-star-filled"></i></li>
+                <li><i class="lni lni-star-filled"></i></li>
+                <li><i class="lni lni-star-filled"></i></li>
+                <li><i class="lni lni-star-filled"></i></li>
+                <li><i class="lni lni-star-filled"></i></li>
+              </ul>
+            </div>
+          </div>
+          <div class="testimonial-text">{{ testimonial.text|safe }}</div>
+          <div class="testimonial-author d-flex align-items-center">
+            <div class="author-image">
+              <img
+                class="shape"
+                src="{% static 'assets/images/textimonial-shape.svg' %}"
+                alt="shape"
+              />
+              {% if testimonial.user_profile_pic %}
+              <img
+                class="author"
+                src="{{ testimonial.user_profile_pic.url }}"
+                alt="author"
+              />
+              {% endif %}
+            </div>
+            <div class="author-content media-body">
+              <h6 class="holder-name">{{ testimonial.username }}</h6>
+              {{ testimonial.user_designation|default_if_none:"" }}
+            </div>
+          </div>
+        </div>
+        <!-- single testimonial -->
+      </div>
+      {% endfor %}
+    </div>
+    <!-- row -->
+  </div>
+  <!-- container -->
+</section>

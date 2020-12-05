@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from core.models import (About, Carousel, Contact, ContactEmail, ContactNumber,
-                         Package, PackageFeature, Portfolio, PortfolioImage,
+                         Package, PackageFeature, Portfolio, PortfolioImage, Product,
                          Service, Social, Testimonial, WebsiteConfig)
 
 
@@ -39,6 +39,7 @@ admin.site.register(Service)
 admin.site.register(About)
 admin.site.register(Social)
 admin.site.register(Testimonial)
+admin.site.register(Product)
 admin.site.register(Portfolio, PortfolioAdmin)
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(Package, ProductAdmin)

@@ -1,0 +1,80 @@
+<section id="home" class="slider_area">
+  <div id="carousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      {% for carousel in carousels %}
+      <li
+        data-target="#carousel"
+        data-slide-to="{{ forloop.counter0 }}"
+        {%
+        if
+        forloop.first
+        %}
+        class="active"
+        {%
+        endif
+        %}
+      ></li>
+      {% endfor %}
+    </ol>
+
+    <div class="carousel-inner">
+      {% for carousel in carousels %}
+      <div
+        class="carousel-item {% if forloop.first %}active{% endif %}"
+        style="background-color: {{ carousel.background_color }};"
+      >
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="slider-content">
+                <h1
+                  class="title wow fadeInUp"
+                  data-wow-duration="1.3s"
+                  data-wow-delay="0.2s"
+                >
+                  {{ carousel.title.capitalize }}
+                </h1>
+                <span
+                  class="wow fadeInUp"
+                  data-wow-duration="1.3s"
+                  data-wow-delay="0.5s"
+                >
+                  {{ carousel.description|default_if_none:""|safe }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- container -->
+        <div class="slider-image-box d-none d-lg-flex align-items-end">
+          <div class="slider-image">
+            <img src="{{ carousel.image.url }}" alt="Hero" />
+          </div>
+          <!-- slider-image -->
+        </div>
+        <!-- slider-imgae box -->
+      </div>
+      <!-- carousel-item -->
+      {% endfor %}
+    </div>
+    {% if carousels|length > 1 %}
+    <a
+      class="carousel-control-prev"
+      href="#carousel"
+      role="button"
+      data-slide="prev"
+    >
+      <i class="lni lni-arrow-left"></i>
+    </a>
+    <a
+      class="carousel-control-next"
+      href="#carousel"
+      role="button"
+      data-slide="next"
+    >
+      <i class="lni lni-arrow-right"></i>
+    </a>
+    {% endif %}
+  </div>
+</section>

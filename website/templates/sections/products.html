@@ -1,0 +1,46 @@
+<section id="products" class="product-area">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-10">
+        <div class="section-title text-center pb-25">
+          <div class="line m-auto"></div>
+          <h3 class="title">Our Products</h3>
+          {{ websiteconfig.products_description }}
+        </div>
+        <!-- section title -->
+      </div>
+    </div>
+    <!-- row -->
+    <div class="row justify-content-center">
+      {% for product in products %}
+      <div
+        class="col-lg-4 col-md-7 col-sm-9 wow fadeIn"
+        data-wow-duration="1s"
+        data-wow-delay="0.2s"
+      >
+        <div class="product-style">
+          <div class="pricing-icon text-center">
+            <img src="{{ product.image.url }}" alt="" />
+          </div>
+          <div class="pricing-header text-center">
+            <h5 class="sub-title">{{ product.title }}</h5>
+            <p class="month">
+              <span class="price">{{ product.discount_price }}</span>
+              <span class="price strike"
+                >{{ product.original_price|default_if_none:"" }}</span
+              >
+            </p>
+          </div>
+          <div class="product-description sidebar-box">
+            {{ product.description|safe }}
+            <p class="read-more"><a href="#" class="button">Read More</a></p>
+          </div>
+        </div>
+        <!-- product style one -->
+      </div>
+      {% endfor %}
+    </div>
+    <!-- row -->
+  </div>
+  <!-- container -->
+</section>

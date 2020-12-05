@@ -451,3 +451,40 @@ class Testimonial(models.Model):
 
     class Meta:
         db_table = "tbl_testimonials"
+
+
+class Product(models.Model):
+    """
+    Product Information & Pricing
+    """
+    title = models.CharField(
+        max_length=256,
+        help_text="Product Title"
+    )
+    image = models.FileField(
+        help_text="Package Image",
+        upload_to='assets/images/product/'
+    )
+    original_price = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        help_text="Strike through price"
+    )
+    discount_price = models.CharField(
+        max_length=50,
+        help_text="Product Price"
+    )
+    description = RichTextField(
+        help_text="Product Description"
+    )
+    is_published = models.BooleanField(
+        db_index=True,
+        default=False
+    )
+
+    def __str__(self) -> str:
+        return '{} - {}'.format(
+            self.title,
+            self.original_price
+        )
