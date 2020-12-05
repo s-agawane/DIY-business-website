@@ -581,83 +581,85 @@
                 </div>
                 <!-- contact wrapper form -->
               </div>
-            <div class="col-lg-6 wow fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.5s">
-              <div class="pt-40 footer-logo text-center">
-                <a class="mt-30" href="index.html">
-                  {% if websiteconfig.logo %}
-                    <img src="{{ websiteconfig.logo.url }}" alt="Logo" />
-                  {% endif %}
-                </a>
-              </div>
-              <!-- footer logo -->
-              <div class="contact-info">
-                <div class="single-contact-info contact-color-1 mt-30 d-flex">
-                  <div class="contact-info-icon">
-                    <i class="lni lni-map-marker"></i>
-                  </div>
-                  <div class="contact-info-content media-body">
-                    {{ contact.address|default_if_none:""|safe }}
-                  </div>
+            <div class="col-lg-6">
+              <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
+                <div class="pt-40 footer-logo text-center">
+                  <a class="mt-30" href="index.html">
+                    {% if websiteconfig.logo %}
+                      <img src="{{ websiteconfig.logo.url }}" alt="Logo" />
+                    {% endif %}
+                  </a>
                 </div>
-                <!-- single contact info -->
-                <div class="single-contact-info contact-color-2 mt-30 d-flex">
-                  <div class="contact-info-icon">
-                    <i class="lni lni-envelope"></i>
+                <!-- footer logo -->
+                <div class="contact-info">
+                  <div class="single-contact-info contact-color-1 mt-30 d-flex">
+                    <div class="contact-info-icon">
+                      <i class="lni lni-map-marker"></i>
+                    </div>
+                    <div class="contact-info-content media-body">
+                      {{ contact.address|default_if_none:""|safe }}
+                    </div>
                   </div>
-                  <div class="contact-info-content media-body">
-                    {% for email in contact.emails.all %}
-                    <p>{{ email }}</p>
-                    {% endfor %}
-                  </div>
-                </div>
-                <!-- single contact info -->
-                <div class="single-contact-info contact-color-3 mt-30 d-flex">
-                  <div class="contact-info-icon">
-                    <i class="lni lni-phone"></i>
-                  </div>
-                  <div class="contact-info-content media-body">
-                    {% for number in contact.numbers.all %}
-                    <p>{{ number }}</p>
-                    {% endfor %}
-                  </div>
-                </div>
                   <!-- single contact info -->
+                  <div class="single-contact-info contact-color-2 mt-30 d-flex">
+                    <div class="contact-info-icon">
+                      <i class="lni lni-envelope"></i>
+                    </div>
+                    <div class="contact-info-content media-body">
+                      {% for email in contact.emails.all %}
+                      <p>{{ email }}</p>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <!-- single contact info -->
+                  <div class="single-contact-info contact-color-3 mt-30 d-flex">
+                    <div class="contact-info-icon">
+                      <i class="lni lni-phone"></i>
+                    </div>
+                    <div class="contact-info-content media-body">
+                      {% for number in contact.numbers.all %}
+                      <p>{{ number }}</p>
+                      {% endfor %}
+                    </div>
+                  </div>
+                    <!-- single contact info -->
+                  </div>
+                <ul class="social text-center mt-20">
+                  {% if social.facebook %}
+                  <li>
+                    <a target="_blank" href="{{ social.facebook }}">
+                      <i class="lni lni-facebook-filled"></i>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% if social.twitter %}
+                  <li>
+                    <a target="_blank" href="{{ social.twitter }}">
+                      <i class="lni lni-twitter-original"></i>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% if social.instagram %}
+                  <li>
+                    <a target="_blank" href="{{ social.instagram }}">
+                      <i class="lni lni-instagram-original"></i>
+                    </a>
+                  </li>
+                  {% endif %}
+                  {% if social.linkedin %}
+                  <li>
+                    <a target="_blank" href="{{ social.linkedin }}">
+                      <i class="lni lni-linkedin-original"></i>
+                    </a>
+                  </li>
+                  {% endif %}
+                </ul>
+                <!-- social -->
+                <div class="copyright text-center mt-10">
+                  {{ websiteconfig.copyright_info|default_if_none:''|safe }}
                 </div>
-              <ul class="social text-center mt-20">
-                {% if social.facebook %}
-                <li>
-                  <a target="_blank" href="{{ social.facebook }}">
-                    <i class="lni lni-facebook-filled"></i>
-                  </a>
-                </li>
-                {% endif %}
-                {% if social.twitter %}
-                <li>
-                  <a target="_blank" href="{{ social.twitter }}">
-                    <i class="lni lni-twitter-original"></i>
-                  </a>
-                </li>
-                {% endif %}
-                {% if social.instagram %}
-                <li>
-                  <a target="_blank" href="{{ social.instagram }}">
-                    <i class="lni lni-instagram-original"></i>
-                  </a>
-                </li>
-                {% endif %}
-                {% if social.linkedin %}
-                <li>
-                  <a target="_blank" href="{{ social.linkedin }}">
-                    <i class="lni lni-linkedin-original"></i>
-                  </a>
-                </li>
-                {% endif %}
-              </ul>
-              <!-- social -->
-              <div class="copyright text-center mt-10">
-                {{ websiteconfig.copyright_info|default_if_none:''|safe }}
+                <!--  copyright -->
               </div>
-              <!--  copyright -->
             </div>
           </div>
           <!-- row -->
