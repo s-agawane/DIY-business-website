@@ -248,6 +248,18 @@ class ContactEmail(models.Model):
     email = models.EmailField(
         help_text="support@uideck.com"
     )
+    is_contact_email = models.BooleanField(
+        default=False
+    )
+
+    def save(self, *args, **kwargs):
+        if self.is_contact_email:
+            ContactEmail.objects.filter(
+                is_contact_email=True
+            ).update(
+                is_contact_email=False
+            )
+        super(ContactEmail, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         return self.email

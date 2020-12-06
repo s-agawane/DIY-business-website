@@ -1,7 +1,13 @@
+from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
+from django.forms import EmailField
+from django.http import HttpResponse
+from django.utils.html import strip_tags
 from django.views.generic import TemplateView
 
-from core.models import (About, Carousel, Contact, Package, Portfolio, Product,
-                         Service, Social, Testimonial, WebsiteConfig)
+from core.models import (About, Carousel, Contact, ContactEmail, Package,
+                         Portfolio, Product, Service, Social, Testimonial,
+                         WebsiteConfig)
 
 
 class SiteView(TemplateView):
@@ -22,3 +28,43 @@ class SiteView(TemplateView):
             'testimonials': Testimonial.objects.filter(is_published=True),
         }
         return context
+
+
+def contact(request, *args, **kwargs):
+    """
+    Send mail
+    """
+    message = "There was a problem with your submission, please try again."
+    status = 403
+    if request.method == "POST":
+        try:
+            name = strip_tags(
+                request.POST.get('name').strip().replace("\r\n", " ")
+            )
+            from_mail = EmailField().clean(request.POST.get('email').strip())
+            massage = request.POST.get('massage').strip()
+            to_mail = ContactEmail.objects.filter(
+                is_contact_email=True).first()
+            if all([name, from_mail, massage]):
+                message = "Oops! Something went wrong and we couldn't send your message.",
+                status = 500
+                if send_mail(
+                    'New contact from ' + name,
+                    'First Name: {}\nEmail: {}\n\nMessage:\n{}\n'.format(
+                        name,
+                        from_mail,
+                        massage
+                    ),
+                    name + ' <' + from_mail + '>',
+                    [to_mail],
+                    fail_silently=False,
+                ):
+                    message = "Thank You! Your message has been sent.",
+                    status = 200
+        except ValidationError as e:
+            message = e
+            status = 400
+    return HttpResponse(
+        message,
+        status=status
+    )
