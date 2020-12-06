@@ -15,7 +15,7 @@ Including another URLconf
 """
 import os
 
-from core.views import SiteView
+from core.views import SiteView, contact
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
@@ -23,7 +23,8 @@ from django.urls import include, path
 urlpatterns = [
     path('sudo/', admin.site.urls),
     path('djrichtextfield/', include('djrichtextfield.urls')),
-    path('', SiteView.as_view(), name='site')
+    path('', SiteView.as_view(), name='site'),
+    path('contact/', contact, name='contact')
 ]
 
 mode = os.environ.get("DJANGO_SETTINGS_MODULE").split(".")[-1]

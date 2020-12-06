@@ -11,7 +11,8 @@
             <i class="lni lni-envelope"></i> Leave <span>A Message.</span>
           </h4>
 
-          <form id="contact-form" method="post">
+          <form id="contact-form" action="{% url 'contact' %}" method="post">
+            {% csrf_token %}
             <div class="row">
               <div class="col-md-6">
                 <div class="form-input mt-25">
@@ -28,11 +29,6 @@
                   <label>Email</label>
                   <div class="input-items default">
                     <input type="email" name="email" placeholder="Email" />
-                    <input
-                      type="hidden"
-                      name="recipient"
-                      value="{{ contact.emails.all.first.email }}"
-                    />
                     <i class="lni lni-envelope"></i>
                   </div>
                 </div>
