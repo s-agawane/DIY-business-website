@@ -8,9 +8,20 @@ https://docs.djangoproject.com/en/3.1/howto/deployment/wsgi/
 """
 
 import os
+from socket import gethostbyname, gethostname
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'website.settings.development')
+ipaddress = gethostbyname(gethostname())
+if ipaddress.startswith('127.0'):
+    os.environ.setdefault(
+        'DJANGO_SETTINGS_MODULE',
+        'website.settings.development'
+    )
+else:
+    os.environ.setdefault(
+        'DJANGO_SETTINGS_MODULE',
+        'website.settings.production'
+    )
 
 application = get_wsgi_application()

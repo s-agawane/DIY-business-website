@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'colorfield',
     'djrichtextfield',
     'admin_interface',
+    'adminsortable2',
 
     # required by admin_interface
     'django.contrib.admin',

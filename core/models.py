@@ -86,6 +86,7 @@ class Carousel(models.Model):
         db_index=True,
         default=False
     )
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def __str__(self) -> str:
         return '{}'.format(
@@ -93,6 +94,7 @@ class Carousel(models.Model):
         )
 
     class Meta:
+        ordering = ('order', )
         db_table = "tbl_carousels"
 
 
@@ -125,6 +127,7 @@ class Service(models.Model):
         db_index=True,
         default=False
     )
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def __str__(self) -> str:
         return '{}'.format(
@@ -132,6 +135,7 @@ class Service(models.Model):
         )
 
     class Meta:
+        ordering = ('order', )
         db_table = "tbl_services"
 
 
@@ -147,6 +151,7 @@ class Portfolio(models.Model):
         db_index=True,
         default=False
     )
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def __str__(self) -> str:
         return '{}'.format(
@@ -154,6 +159,7 @@ class Portfolio(models.Model):
         )
 
     class Meta:
+        ordering = ('order', )
         db_table = "tbl_portfolios"
 
 
@@ -171,6 +177,7 @@ class PortfolioImage(models.Model):
         help_text="Portfolio Category Image",
         upload_to='assets/images/portfolio/'
     )
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def __str__(self) -> str:
         return '{} - ({})'.format(
@@ -179,6 +186,7 @@ class PortfolioImage(models.Model):
         )
 
     class Meta:
+        ordering = ('order', )
         db_table = "tbl_portfolio_images"
 
 
@@ -251,10 +259,12 @@ class ContactEmail(models.Model):
     is_contact_email = models.BooleanField(
         default=False
     )
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def save(self, *args, **kwargs):
         if self.is_contact_email:
             ContactEmail.objects.filter(
+                contact=self.contact,
                 is_contact_email=True
             ).update(
                 is_contact_email=False
@@ -265,6 +275,7 @@ class ContactEmail(models.Model):
         return self.email
 
     class Meta:
+        ordering = ('order', )
         db_table = "tbl_contact_emails"
 
 
@@ -282,11 +293,13 @@ class ContactNumber(models.Model):
         max_length=20,
         help_text="+9188xxxxxx"
     )
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def __str__(self) -> str:
         return self.number
 
     class Meta:
+        ordering = ('order', )
         db_table = "tbl_contact_numbers"
 
 
@@ -394,6 +407,7 @@ class Package(models.Model):
         db_index=True,
         default=False
     )
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def __str__(self) -> str:
         return '{} - {}'.format(
@@ -402,6 +416,7 @@ class Package(models.Model):
         )
 
     class Meta:
+        ordering = ('order', )
         db_table = "tbl_packages"
 
 
@@ -419,6 +434,7 @@ class PackageFeature(models.Model):
         max_length=256,
         help_text="Package Feature Title"
     )
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def __str__(self) -> str:
         return '{} - ({})'.format(
@@ -427,6 +443,7 @@ class PackageFeature(models.Model):
         )
 
     class Meta:
+        ordering = ('order', )
         db_table = "tbl_package_features"
 
 
@@ -457,11 +474,13 @@ class Testimonial(models.Model):
         db_index=True,
         default=False
     )
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def __str__(self) -> str:
         return self.username
 
     class Meta:
+        ordering = ('order', )
         db_table = "tbl_testimonials"
 
 
@@ -494,9 +513,14 @@ class Product(models.Model):
         db_index=True,
         default=False
     )
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def __str__(self) -> str:
         return '{} - {}'.format(
             self.title,
             self.original_price
         )
+
+    class Meta:
+        ordering = ('order', )
+        db_table = "tbl_products"

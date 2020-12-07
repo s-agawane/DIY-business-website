@@ -2,11 +2,22 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from socket import gethostbyname, gethostname
 
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'website.settings.development')
+    ipaddress = gethostbyname(gethostname())
+    if ipaddress.startswith('127.0'):
+        os.environ.setdefault(
+            'DJANGO_SETTINGS_MODULE',
+            'website.settings.development'
+        )
+    else:
+        os.environ.setdefault(
+            'DJANGO_SETTINGS_MODULE',
+            'website.settings.production'
+        )
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

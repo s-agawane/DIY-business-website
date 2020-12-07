@@ -44,7 +44,9 @@ def contact(request, *args, **kwargs):
             from_mail = EmailField().clean(request.POST.get('email').strip())
             massage = request.POST.get('massage').strip()
             to_mail = ContactEmail.objects.filter(
-                is_contact_email=True).first()
+                contact__is_active=True,
+                is_contact_email=True
+            ).only('email').first()
             if all([name, from_mail, massage]):
                 message = "Oops! Something went wrong and we couldn't send your message.",
                 status = 500
