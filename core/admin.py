@@ -1,45 +1,63 @@
+from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
 from django.contrib import admin
+from django.contrib.admin.options import ModelAdmin
 
 from core.models import (About, Carousel, Contact, ContactEmail, ContactNumber,
-                         Package, PackageFeature, Portfolio, PortfolioImage, Product,
-                         Service, Social, Testimonial, WebsiteConfig)
+                         Package, PackageFeature, Portfolio, PortfolioImage,
+                         Product, Service, Social, Testimonial, WebsiteConfig)
 
 
-class PortfolioImageAdmin(admin.TabularInline):
+class PortfolioImageAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = PortfolioImage
 
 
-class PortfolioAdmin(admin.ModelAdmin):
-    inlines = [PortfolioImageAdmin, ]
+@admin.register(Portfolio)
+class PortfolioAdmin(SortableAdminMixin, admin.ModelAdmin):
+    inlines = (PortfolioImageAdmin, )
 
 
-class ContactEmailAdmin(admin.TabularInline):
+class ContactEmailAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = ContactEmail
 
 
-class ContactNumberAdmin(admin.TabularInline):
+class ContactNumberAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = ContactNumber
 
 
+@admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    inlines = [ContactEmailAdmin, ContactNumberAdmin]
+    inlines = (ContactEmailAdmin, ContactNumberAdmin)
 
 
-class ProductFeatureAdmin(admin.TabularInline):
+class PackageFeatureAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = PackageFeature
 
 
-class ProductAdmin(admin.ModelAdmin):
-    inlines = [ProductFeatureAdmin, ]
+@admin.register(Package)
+class PackageAdmin(SortableAdminMixin, admin.ModelAdmin):
+    inlines = (PackageFeatureAdmin, )
+
+
+@admin.register(Carousel)
+class CarouselAdmin(SortableAdminMixin, ModelAdmin):
+    pass
+
+
+@admin.register(Service)
+class ServiceAdmin(SortableAdminMixin, ModelAdmin):
+    pass
+
+
+@admin.register(Testimonial)
+class TestimonialAdmin(SortableAdminMixin, ModelAdmin):
+    pass
+
+
+@admin.register(Product)
+class ProductAdmin(SortableAdminMixin, ModelAdmin):
+    pass
 
 
 admin.site.register(WebsiteConfig)
-admin.site.register(Carousel)
-admin.site.register(Service)
 admin.site.register(About)
 admin.site.register(Social)
-admin.site.register(Testimonial)
-admin.site.register(Product)
-admin.site.register(Portfolio, PortfolioAdmin)
-admin.site.register(Contact, ContactAdmin)
-admin.site.register(Package, ProductAdmin)

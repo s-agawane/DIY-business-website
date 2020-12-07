@@ -148,9 +148,10 @@ $(function () {
   $(".testimonial-active").slick({
     dots: true,
     speed: 800,
+    infinite: true,
     arrows: false,
     autoplay: true,
-    autoplaySpeed: 1000,
+    autoplaySpeed: 3000,
     centerMode: true,
     centerPadding: "0",
     slidesToShow: 3,
