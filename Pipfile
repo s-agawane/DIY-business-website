@@ -15,6 +15,7 @@ django-environ = "*"
 django-richtextfield = "*"
 gunicorn = "*"
 django-admin-interface = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"

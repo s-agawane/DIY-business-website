@@ -12,11 +12,11 @@ class WebsiteConfig(models.Model):
         max_length=256,
         help_text="Website Title"
     )
-    logo = models.FileField(
+    logo = models.ImageField(
         help_text="Website Logo",
         upload_to='assets/logo/'
     )
-    favicon = models.FileField(
+    favicon = models.ImageField(
         help_text="Website favicon",
         upload_to='assets/favicon/'
     )
@@ -69,7 +69,7 @@ class Carousel(models.Model):
         max_length=256,
         help_text="Carousel Item Title"
     )
-    image = models.FileField(
+    image = models.ImageField(
         help_text="Carousel Item Image",
         upload_to='assets/images/carousels/'
     )
@@ -106,7 +106,7 @@ class Service(models.Model):
         max_length=256,
         help_text="Service Title"
     )
-    image = models.FileField(
+    image = models.ImageField(
         blank=True,
         null=True,
         help_text="Service Image",
@@ -173,7 +173,7 @@ class PortfolioImage(models.Model):
         related_name="images",
         help_text="Choose Portfolio Category"
     )
-    image = models.FileField(
+    image = models.ImageField(
         help_text="Portfolio Category Image",
         upload_to='assets/images/portfolio/'
     )
@@ -387,7 +387,7 @@ class Package(models.Model):
         max_length=256,
         help_text="Product Title"
     )
-    image = models.FileField(
+    image = models.ImageField(
         blank=True,
         null=True,
         help_text="Package Image",
@@ -454,7 +454,7 @@ class Testimonial(models.Model):
     text = RichTextField(
         help_text="Testimonial Text"
     )
-    user_profile_pic = models.FileField(
+    user_profile_pic = models.ImageField(
         blank=True,
         null=True,
         help_text="Package Image",
@@ -492,7 +492,7 @@ class Product(models.Model):
         max_length=256,
         help_text="Product Title"
     )
-    image = models.FileField(
+    image = models.ImageField(
         help_text="Package Image",
         upload_to='assets/images/product/'
     )
