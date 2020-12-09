@@ -28,8 +28,8 @@
               <i class="{{ service.icon_class }}"></i>
               {% endif %} {% if service.image %}
               <img
-                class="shape"
-                src="{{ service.image.url }}"
+                class="lazyload shape"
+                data-src="{{ service.image.url }}"
                 alt="Shape"
                 {%
                 if

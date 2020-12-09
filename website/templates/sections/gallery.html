@@ -45,10 +45,15 @@
           {% for portfolio in portfolios %}
           {% with y=forloop.counter|stringformat:"s" %}
           {% for portfolio_image in portfolio.images.all %}
-          <div class="col-lg-4 col-sm-6 {{ 'loop'|add:y }}-4">
+          <div class="col-lg-4 col-sm-6 {{ 'loop'|add:y }}-4 pt-10">
             <div class="single-portfolio">
               <div class="portfolio-image">
-                <img src="{{ portfolio_image.image.url }}" alt="" />
+                <img class="lazyload"
+                  height={{ portfolio_image.height }}
+                  width={{ portfolio_image.width }}
+                  data-src="{{ portfolio_image.image.url }}"
+                  alt=""
+                />
                 <div
                   class="portfolio-overlay d-flex align-items-center justify-content-center"
                 >
@@ -60,9 +65,9 @@
                         ><i class="lni lni-zoom-in"></i
                       ></a>
                       <img
-                        src="{% static 'assets/images/portfolio/shape.svg' %}"
+                        data-src="{% static 'assets/images/portfolio/shape.svg' %}"
                         alt="shape"
-                        class="shape"
+                        class="lazyload shape"
                       />
                     </div>
                   </div>

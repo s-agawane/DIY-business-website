@@ -1,6 +1,10 @@
 $(function () {
   "use strict";
 
+  $(document).ready(function ($) {
+    lazyload();
+  });
+
   //===== Section Menu Active
 
   var scrollLink = $(".page-scroll");
@@ -117,28 +121,25 @@ $(function () {
   });
 
   //===== Isotope Project 4
+  var $grid = $(".grid").isotope({
+    // options
+    transitionDuration: "1s",
+    filter: $(".portfolio-menu > ul > li.active").attr("data-filter"),
+  });
 
-  $(".container").imagesLoaded(function () {
-    var $grid = $(".grid").isotope({
-      // options
-      transitionDuration: "1s",
-      filter: $(".portfolio-menu > ul > li.active").attr("data-filter"),
+  // filter items on button click
+  $(".portfolio-menu ul").on("click", "li", function () {
+    var filterValue = $(this).attr("data-filter");
+    $grid.isotope({
+      filter: filterValue,
     });
+  });
 
-    // filter items on button click
-    $(".portfolio-menu ul").on("click", "li", function () {
-      var filterValue = $(this).attr("data-filter");
-      $grid.isotope({
-        filter: filterValue,
-      });
-    });
-
-    //for menu active class
-    $(".portfolio-menu ul li").on("click", function (event) {
-      $(this).siblings(".active").removeClass("active");
-      $(this).addClass("active");
-      event.preventDefault();
-    });
+  //for menu active class
+  $(".portfolio-menu ul li").on("click", function (event) {
+    $(this).siblings(".active").removeClass("active");
+    $(this).addClass("active");
+    event.preventDefault();
   });
 
   //===== slick Testimonial Four
@@ -156,6 +157,7 @@ $(function () {
     centerPadding: "0",
     slidesToShow: 3,
     slidesToScroll: 4,
+    lazyLoad: "ondemand",
     responsive: [
       {
         breakpoint: 1200,

@@ -173,9 +173,13 @@ class PortfolioImage(models.Model):
         related_name="images",
         help_text="Choose Portfolio Category"
     )
+    height = models.PositiveIntegerField(default=0)
+    width = models.PositiveIntegerField(default=0)
     image = models.ImageField(
         help_text="Portfolio Category Image",
-        upload_to='assets/images/portfolio/'
+        upload_to='assets/images/portfolio/',
+        height_field='height',
+        width_field='width'
     )
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
