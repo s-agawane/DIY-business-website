@@ -41,13 +41,13 @@
             <div class="author-image">
               <img
                 class="shape"
-                src="{% static 'assets/images/textimonial-shape.svg' %}"
+                data-lazy="{% static 'assets/images/textimonial-shape.svg' %}"
                 alt="shape"
               />
               {% if testimonial.user_profile_pic %}
               <img
                 class="author"
-                src="{{ testimonial.user_profile_pic.url }}"
+                data-lazy="{{ testimonial.user_profile_pic.url }}"
                 alt="author"
               />
               {% endif %}

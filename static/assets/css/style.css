@@ -3450,7 +3450,7 @@ p {
 ===========================*/
 .portfolio-area {
   padding-top: 60px;
-  padding-bottom: 130px;
+  padding-bottom: 60px;
 }
 
 .portfolio-menu ul li {
@@ -3517,11 +3517,12 @@ p {
 }
 
 .single-portfolio .portfolio-image {
+  text-align: center;
   position: relative;
   overflow: hidden;
 }
 .single-portfolio .portfolio-image img {
-  width: 100%;
+  max-width: 100%;
   -webkit-transition: all 0.3s ease-out 0s;
   -moz-transition: all 0.3s ease-out 0s;
   -ms-transition: all 0.3s ease-out 0s;
@@ -3612,6 +3613,7 @@ p {
 }
 .pricing-style .pricing-icon img {
   width: 190px;
+  height: auto;
 }
 .pricing-style .pricing-header .sub-title {
   font-size: 20px;
