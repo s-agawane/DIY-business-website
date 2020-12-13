@@ -12,9 +12,13 @@ class WebsiteConfig(models.Model):
         max_length=256,
         help_text="Website Title"
     )
-    logo = models.ImageField(
-        help_text="Website Logo",
-        upload_to='assets/logo/'
+    logo_dark = models.ImageField(
+        help_text="Website DARK Logo",
+        upload_to='assets/logo/dark/'
+    )
+    logo_light = models.ImageField(
+        help_text="Website LIGHT Logo",
+        upload_to='assets/logo/light/'
     )
     favicon = models.ImageField(
         help_text="Website favicon",

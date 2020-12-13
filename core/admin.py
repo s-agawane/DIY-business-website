@@ -194,13 +194,13 @@ class WebsiteConfigAdmin(ModelAdmin):
         try:
             return format_html(
                 '<img src="{}" style="max-width: 100px;"/>'.format(
-                    obj.logo.url
+                    obj.logo_dark.url
                 )
             )
         except ValueError:
             return None
 
-    image_tag.short_description = 'Logo'
+    image_tag.short_description = 'Logo (DARK)'
 
     list_display = (
         '__str__',

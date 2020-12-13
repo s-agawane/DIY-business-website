@@ -2878,7 +2878,6 @@ p {
   padding: 0;
 }
 .navbar-area .navbar .navbar-brand img {
-  max-width: 80px;
   max-height: 80px;
 }
 .navbar-area .navbar .navbar-toggler .toggler-icon {
@@ -4114,6 +4113,9 @@ p.form-message.error.form-message.error {
 .footer-area {
   background-color: #f4f6f7;
   padding-bottom: 120px;
+}
+.footer-area .footer-logo a img {
+  max-width: 60%;
 }
 .footer-area .social li {
   display: inline-block;
