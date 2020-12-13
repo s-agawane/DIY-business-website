@@ -249,13 +249,10 @@
         var scroll = $(window).scrollTop();
         if (scroll < 20) {
           $(".navbar-area").removeClass("sticky");
-          $(".navbar-area img").attr("src", "{{ websiteconfig.logo.url }}");
+          $(".navbar-area img").attr("src", "{{ websiteconfig.logo_light.url }}");
         } else {
           $(".navbar-area").addClass("sticky");
-          // $(".navbar-area img").attr(
-          //   "src",
-          //   "{% static 'assets/images/logo-2.svg' %}"
-          // );
+          $(".navbar-area img").attr("src", "{{ websiteconfig.logo_dark.url }}");
         }
       });
     </script>
