@@ -1,4 +1,4 @@
-<section class="footer-area footer-dark">
+<section class="footer-area">
   <div class="container">
     <div class="row">
       <div class="col-lg-6">
@@ -63,8 +63,14 @@
         <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
           <div class="pt-40 footer-logo text-center">
             <a class="mt-30" href="index.html">
-              {% if websiteconfig.logo_light %}
-              <img src="{{ websiteconfig.logo_light.url }}" alt="Logo" />
+              {% if contact.is_background_dark %}
+                {% if websiteconfig.logo_light %}
+                <img src="{{ websiteconfig.logo_light.url }}" alt="Logo" />
+                {% endif %}
+              {% else %}
+                {% if websiteconfig.logo_dark %}
+                <img src="{{ websiteconfig.logo_dark.url }}" alt="Logo" />
+                {% endif %}
               {% endif %}
             </a>
           </div>

@@ -4075,7 +4075,7 @@ p.form-message.error.form-message.error {
 .contact-info .single-contact-info .contact-info-content {
   padding-left: 20px;
 }
-.contact-info .single-contact-info .contact-info-content p {
+.footer-area.footer-dark .contact-info .single-contact-info .contact-info-content p {
   color: #fff;
 }
 .contact-info .single-contact-info.contact-color-1 .contact-info-icon i {
@@ -4088,7 +4088,7 @@ p.form-message.error.form-message.error {
   background-color: #005ad5;
 }
 
-.contact-wrapper .contact-title {
+.footer-area.footer-dark .contact-wrapper .contact-title {
   font-size: 32px;
   font-weight: 700;
   color: #fff;
@@ -4176,9 +4176,6 @@ p.form-message.error.form-message.error {
 }
 .footer-area .copyright p {
   color: #121212;
-}
-.footer-area.footer-dark {
-  background-color: #121212;
 }
 .footer-area.footer-dark .social li a {
   color: #fff;
@@ -4274,7 +4271,7 @@ p.form-message.error.form-message.error {
   max-width: 100%;
 }
 .product-style .pricing-header .sub-title {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 600;
   line-height: 25px;
   color: black;

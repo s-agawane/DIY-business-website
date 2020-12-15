@@ -19,14 +19,12 @@
           data-wow-duration="1s"
           data-wow-delay="0.2s"
         >
-          <div class="features-title-icon d-flex justify-content-between">
+          <div class="features-title-icon">
             <h4 class="features-title">
               <a href="javascript:void(0);">{{ service.title }}</a>
             </h4>
             <div class="features-icon">
-              {% if service.icon_class %}
-              <i class="{{ service.icon_class }}"></i>
-              {% endif %} {% if service.image %}
+              {% if service.image %}
               <img
                 class="lazyload shape"
                 data-src="{{ service.image.url }}"
@@ -41,6 +39,8 @@
                 endif
                 %}
               />
+              {% elif service.icon_class %}
+              <i class="{{ service.icon_class }}"></i>
               {% endif %}
             </div>
           </div>

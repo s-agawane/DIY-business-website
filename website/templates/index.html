@@ -243,8 +243,15 @@
     <script src="{% static 'assets/js/main.js' %}"></script>
 
     <script type="text/javascript">
-      //===== Sticky
 
+      //===== Footer
+      $('.footer-area')[0].style.backgroundColor = '{{ contact.background_color }}';
+      {% if contact.is_background_dark %}
+      $('.footer-area').addClass('footer-dark');
+      {% endif %}
+
+
+      //===== Sticky
       $(window).on("scroll", function (event) {
         var scroll = $(window).scrollTop();
         if (scroll < 20) {
