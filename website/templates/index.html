@@ -228,10 +228,14 @@
         var scroll = $(window).scrollTop();
         if (scroll < 20) {
           $(".navbar-area").removeClass("sticky");
+          {% if websiteconfig.logo_light %}
           $(".navbar-area img").attr("src", "{{ websiteconfig.logo_light.url }}");
+          {% endif %}
         } else {
           $(".navbar-area").addClass("sticky");
+          {% if websiteconfig.logo_dark %}
           $(".navbar-area img").attr("src", "{{ websiteconfig.logo_dark.url }}");
+          {% endif %}
         }
       });
     </script>
