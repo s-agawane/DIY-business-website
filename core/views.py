@@ -30,6 +30,22 @@ class SiteView(TemplateView):
         return context
 
 
+class PackagesView(SiteView):
+    template_name = 'sections/packages.html'
+
+
+class PortfolioView(SiteView):
+    template_name = 'sections/gallery.html'
+
+
+class ProductsView(SiteView):
+    template_name = 'sections/products.html'
+
+
+class ServicesView(SiteView):
+    template_name = 'sections/services.html'
+
+
 def contact(request, *args, **kwargs):
     """
     Send mail

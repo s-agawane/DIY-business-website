@@ -26,30 +26,55 @@
           <div class="collapse navbar-collapse sub-menu-bar" id="navbarTwo">
             <ul class="navbar-nav m-auto">
               {% if carousels|length > 0 %}
-              <li class="nav-item active">
+              <li class="nav-item {% if request.path == '/' %}active{% endif %}">
                 <a class="page-scroll" href="#home">Home</a>
               </li>
               {% endif %}
+
               {% if services|length > 0 %}
-              <li class="nav-item">
+              <li class="nav-item
+              {% if request.path == '/services/' %}active">
                 <a class="page-scroll" href="#services">Services</a>
+                {% else %}
+                ">
+                <a href="{% url 'services' %}">Services</a>
+                {% endif %}
               </li>
               {% endif %}
+
               {% if portfolios|length > 0 %}
-              <li class="nav-item">
+              <li class="nav-item 
+              {% if request.path == '/portfolio/' %}active">
                 <a class="page-scroll" href="#portfolio">Gallery</a>
+                {% else %}
+                ">
+                <a href="{% url 'portfolio' %}">Gallery</a>
+                {% endif %}
               </li>
               {% endif %}
+
               {% if packages|length > 0 %}
-              <li class="nav-item">
+              <li class="nav-item
+                {% if request.path == '/packages/' %}active">
                 <a class="page-scroll" href="#pricing">Pricing</a>
+                {% else %}
+                ">
+                <a href="{% url 'packages' %}">Pricing</a>
+                {% endif %}
               </li>
               {% endif %}
+
               {% if products|length > 0 %}
-              <li class="nav-item">
+              <li class="nav-item
+                {% if request.path == '/products/' %}active">
                 <a class="page-scroll" href="#products">Products</a>
+                {% else %}
+                ">
+                <a href="{% url 'products' %}">Products</a>
+                {% endif %}
               </li>
               {% endif %}
+
               {% if about %}
               <li class="nav-item">
                 <a class="page-scroll" href="#about">About</a>
