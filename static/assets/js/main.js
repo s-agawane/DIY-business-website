@@ -237,4 +237,14 @@ $(function () {
 
 $(window).on("load", function (event) {
   $(".preloader").delay(500).fadeOut(500);
+  var this1 = $('.nav-item.active a')[0];
+  var target2 = $(this1.hash);
+  target2 = target2.length ? target2 : $("[name=" + this1.hash.slice(1) + "]");
+  $("html, body").animate(
+    {
+      scrollTop: target2.offset().top - 60,
+    },
+    1200,
+    "easeInOutExpo"
+  );
 });

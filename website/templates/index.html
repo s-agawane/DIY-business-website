@@ -100,37 +100,9 @@
 
     <!--====== SLIDER PART ENDS ======-->
 
-    <!--====== FEATRES TWO PART START ======-->
+    {% block content %}
 
-    {% if services|length > 0 %}
-      {% include 'sections/services.html' %}
-    {% endif %}
-
-    <!--====== FEATRES TWO PART ENDS ======-->
-
-    <!--====== PORTFOLIO PART START ======-->
-
-    {% if portfolios|length > 0 %}
-      {% include 'sections/gallery.html' %}
-    {% endif %}
-
-    <!--====== PORTFOLIO PART ENDS ======-->
-
-    <!--====== PRICING START ======-->
-
-    {% if packages|length > 0 %}
-      {% include 'sections/packages.html' %}
-    {% endif %}
-
-    <!--====== PRICING ENDS ======-->
-
-    <!--====== PRODUCTS START ======-->
-
-    {% if products|length > 0 %}
-      {% include 'sections/products.html' %}
-    {% endif %}
-
-    <!--====== PRODUCTS ENDS ======-->
+    {% endblock %}
 
     <!--====== ABOUT PART START ======-->
 
