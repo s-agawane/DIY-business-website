@@ -227,6 +227,14 @@ class Contact(models.Model):
         null=True,
         help_text="Whatsapp default message template."
     )
+    background_color = ColorField(
+        help_text="Contact Us Background Color",
+        default="#fff"
+    )
+    is_background_dark = models.BooleanField(
+        default=False,
+        help_text="Is the selected background color dark ?"
+    )
     is_active = models.BooleanField(
         default=True
     )
@@ -406,6 +414,11 @@ class Package(models.Model):
         blank=True,
         null=True,
         help_text="Strike through price"
+    )
+    pre_discount_price_text = RichTextField(
+        blank=True,
+        null=True,
+        help_text="Text which appears before Product Price"
     )
     discount_price = models.CharField(
         max_length=50,

@@ -18,7 +18,7 @@
         data-wow-duration="1s"
         data-wow-delay="0.2s"
       >
-        <div class="pricing-style">
+        <div class="pricing-style mt-30">
           {% if package.image %}
           <div class="pricing-icon text-center">
             <img
@@ -30,6 +30,7 @@
           {% endif %}
           <div class="pricing-header text-center">
             <h5 class="sub-title">{{ package.title }}</h5>
+            {{ package.pre_discount_price_text|default_if_none:''|safe }}
             <p class="month">
               <span class="price">{{ package.discount_price }}</span>
               <span class="price strike"
