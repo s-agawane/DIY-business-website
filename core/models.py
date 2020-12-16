@@ -70,6 +70,8 @@ class Carousel(models.Model):
     Carousel Config
     """
     title = models.CharField(
+        null=True,
+        blank=True,
         max_length=256,
         help_text="Carousel Item Title"
     )
