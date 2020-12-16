@@ -32,7 +32,7 @@
                   data-wow-duration="1.3s"
                   data-wow-delay="0.2s"
                 >
-                  {{ carousel.title }}
+                  {{ carousel.title|default_if_none:""|safe }}
                 </h1>
                 <span
                   class="wow fadeInUp"
