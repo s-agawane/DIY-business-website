@@ -23,7 +23,8 @@ DATABASES = {
         'USER': env("DB_USERNAME"),
         'PASSWORD': env("DB_PASSWORD"),
         'HOST': env("DB_HOST"),
-        'PORT':  env("DB_PORT")
+        'PORT':  env("DB_PORT"),
+        'OPTIONS': {'charset': 'utf8mb4'},
     }
 }
 
