@@ -20,6 +20,24 @@ class WebsiteConfig(models.Model):
         help_text="Website LIGHT Logo",
         upload_to='assets/logo/light/'
     )
+    primary_color = ColorField(
+        default="#0067f4",
+        help_text="Website Primary color"
+    )
+    primary_font = models.CharField(
+        max_length=50,
+        default="Poppins",
+        help_text="Priamry website font"
+    )
+    secondary_font = models.CharField(
+        max_length=50,
+        default="sans-serif",
+        help_text="Secondary website font"
+    )
+    spinner_style = models.PositiveSmallIntegerField(
+        default=1,
+        help_text="1: Default, 2: YTP Style"
+    )
     favicon = models.ImageField(
         help_text="Website favicon",
         upload_to='assets/favicon/'
@@ -228,10 +246,6 @@ class Contact(models.Model):
         blank=True,
         null=True,
         help_text="Whatsapp default message template."
-    )
-    background_color = ColorField(
-        help_text="Contact Us Background Color",
-        default="#fff"
     )
     is_background_dark = models.BooleanField(
         default=False,
