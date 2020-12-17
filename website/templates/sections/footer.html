@@ -1,114 +1,68 @@
 <section class="footer-area">
   <div class="container">
     <div class="row">
-      <div class="col-lg-6">
-        <div
-          class="contact-wrapper form-style-two pt-40 wow fadeInLeftBig"
-          data-wow-duration="1s"
-          data-wow-delay="0.5s"
-        >
-          <h4 class="contact-title pb-10">
-            <i class="lni lni-envelope"></i> Leave <span>A Message.</span>
-          </h4>
-
-          <form id="contact-form" action="{% url 'contact' %}" method="post">
-            {% csrf_token %}
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-input mt-25">
-                  <label>Name</label>
-                  <div class="input-items default">
-                    <input name="name" type="text" placeholder="Name" />
-                    <i class="lni lni-user"></i>
-                  </div>
-                </div>
-                <!-- form input -->
-              </div>
-              <div class="col-md-6">
-                <div class="form-input mt-25">
-                  <label>Email</label>
-                  <div class="input-items default">
-                    <input type="email" name="email" placeholder="Email" />
-                    <i class="lni lni-envelope"></i>
-                  </div>
-                </div>
-                <!-- form input -->
-              </div>
-              <div class="col-md-12">
-                <div class="form-input mt-25">
-                  <label>Message</label>
-                  <div class="input-items default">
-                    <textarea name="massage" placeholder="Message"></textarea>
-                    <i class="lni lni-pencil-alt"></i>
-                  </div>
-                </div>
-                <!-- form input -->
-              </div>
-              <p class="form-message"></p>
-              <div class="col-md-12">
-                <div class="form-input light-rounded-buttons mt-30">
-                  <button class="main-btn light-rounded-two">
-                    Send Message
-                  </button>
-                </div>
-                <!-- form input -->
-              </div>
-            </div>
-            <!-- row -->
-          </form>
-        </div>
-        <!-- contact wrapper form -->
-      </div>
-      <div class="col-lg-6">
+      <div class="col-lg-12">
         <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay="0.8s">
-          <div class="pt-40 footer-logo text-center">
-            <a class="mt-30" href="index.html">
-              {% if contact.is_background_dark %}
-                {% if websiteconfig.logo_light %}
-                <img src="{{ websiteconfig.logo_light.url }}" alt="Logo" />
+          <div class="row">
+            <div class="col-sm-12 col-lg-6 m-auto pt-50 footer-logo text-center">
+              <a class="mt-30" href="index.html">
+                {% if contact.is_background_dark %}
+                  {% if websiteconfig.logo_light %}
+                  <img src="{{ websiteconfig.logo_light.url }}" alt="Logo" />
+                  {% endif %}
+                {% else %}
+                  {% if websiteconfig.logo_dark %}
+                  <img src="{{ websiteconfig.logo_dark.url }}" alt="Logo" />
+                  {% endif %}
                 {% endif %}
-              {% else %}
-                {% if websiteconfig.logo_dark %}
-                <img src="{{ websiteconfig.logo_dark.url }}" alt="Logo" />
-                {% endif %}
-              {% endif %}
-            </a>
+              </a>
+            </div>
           </div>
           <!-- footer logo -->
-          <div class="contact-info">
-            <div class="single-contact-info contact-color-1 mt-30 d-flex">
-              <div class="contact-info-icon">
-                <i class="lni lni-map-marker"></i>
+          <div class="row">
+            <div class="col contact-info pt-35 pb-35">
+              <div class="row">
+                <div class="col-lg-4 col-md-6">
+                  <div class="single-contact-info contact-color-1 mt-30 d-flex">
+                    <div class="contact-info-icon">
+                      <i class="lni lni-map-marker"></i>
+                    </div>
+                    <div class="contact-info-content media-body">
+                      {{ contact.address|default_if_none:""|safe }}
+                    </div>
+                  </div>
+                </div>
+                <!-- single contact info -->
+                <div class="col-lg-4 col-md-6">
+                  <div class="single-contact-info contact-color-3 mt-30 d-flex">
+                    <div class="contact-info-icon">
+                      <i class="lni lni-phone"></i>
+                    </div>
+                    <div class="contact-info-content media-body">
+                      {% for number in contact.numbers.all %}
+                      <p>{{ number }}</p>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                <!-- single contact info -->
+                <div class="col-lg-4 col-md-6">
+                  <div class="single-contact-info contact-color-2 mt-30 d-flex">
+                    <div class="contact-info-icon">
+                      <i class="lni lni-envelope"></i>
+                    </div>
+                    <div class="contact-info-content media-body">
+                      {% for email in contact.emails.all %}
+                      <p>{{ email }}</p>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="contact-info-content media-body">
-                {{ contact.address|default_if_none:""|safe }}
-              </div>
+              <!-- single contact info -->
             </div>
-            <!-- single contact info -->
-            <div class="single-contact-info contact-color-2 mt-30 d-flex">
-              <div class="contact-info-icon">
-                <i class="lni lni-envelope"></i>
-              </div>
-              <div class="contact-info-content media-body">
-                {% for email in contact.emails.all %}
-                <p>{{ email }}</p>
-                {% endfor %}
-              </div>
-            </div>
-            <!-- single contact info -->
-            <div class="single-contact-info contact-color-3 mt-30 d-flex">
-              <div class="contact-info-icon">
-                <i class="lni lni-phone"></i>
-              </div>
-              <div class="contact-info-content media-body">
-                {% for number in contact.numbers.all %}
-                <p>{{ number }}</p>
-                {% endfor %}
-              </div>
-            </div>
-            <!-- single contact info -->
           </div>
-          <ul class="social text-center mt-20">
+          <ul class="social text-center mt-25">
             {% if social.facebook %}
             <li>
               <a target="_blank" href="{{ social.facebook }}">

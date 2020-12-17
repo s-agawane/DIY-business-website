@@ -19,14 +19,6 @@
 /*===========================
       01.COMMON css 
 ===========================*/
-@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800");
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700,800");
-body {
-  font-family: "Montserrat", "Roboto";
-  font-weight: normal;
-  font-style: normal;
-  color: #121212;
-}
 
 * {
   margin: 0;
@@ -65,7 +57,6 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Montserrat", "Roboto";
   font-weight: 600;
   color: #121212;
   margin: 0px;
@@ -169,6 +160,27 @@ p {
   vertical-align: middle;
   text-align: center;
 }
+.preloader .loader img {
+  width: 15em;
+}
+.preloader .circonf {
+  margin: 1em;
+  display: inline-block;
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+  border: 4px solid silver;
+  animation: circ-anim 0.7s linear infinite;
+  -webkit-animation: circ-anim 0.7s linear infinite;
+  -moz-animation: circ-anim 0.7s linear infinite;
+  -o-animation: circ-anim 0.7s linear infinite;
+}
+.preloader .circonf-6 {
+  border-width: 0px;
+  border-radius: 50%;
+  border-top: 6px solid var(--primary-color);
+  border-right: 3px solid transparent;
+}
 .preloader .loader .ytp-spinner {
   position: absolute;
   left: 50%;
@@ -238,7 +250,7 @@ p {
   height: 100%;
   border-style: solid;
   /* Spinner Color */
-  border-color: #0067f4 #0067f4 #e9ecef;
+  border-color: var(--primary-color) var(--primary-color) #e9ecef;
   border-radius: 50%;
   border-width: 6px;
 }
@@ -494,6 +506,14 @@ p {
     transform: rotate(-130deg);
   }
 }
+@keyframes circ-anim {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 /*===========================
     11.BUTTON css 
 ===========================*/
@@ -742,19 +762,19 @@ p {
   border-radius: 5px;
 }
 .light-rounded-buttons .light-rounded-one {
-  border-color: #0067f4;
+  border-color: var(--primary-color);
 }
 .light-rounded-buttons .light-rounded-one:hover {
-  color: #0067f4;
+  color: var(--primary-color);
   background-color: rgba(0, 103, 244, 0.4);
 }
 .light-rounded-buttons .light-rounded-two {
   color: #fff;
-  background-color: #0067f4;
-  border-color: #0067f4;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 .light-rounded-buttons .light-rounded-two:hover {
-  color: #0067f4;
+  color: var(--primary-color);
   background-color: transparent;
 }
 .light-rounded-buttons .light-rounded-three {
@@ -3778,7 +3798,7 @@ p {
 .single-testimonial .testimonial-review .star ul li {
   display: inline-block;
   font-size: 16px;
-  color: #fe806d;
+  color: #ffc107;
 }
 .single-testimonial .testimonial-text {
   overflow-wrap: break-word;
@@ -3806,17 +3826,17 @@ p {
   font-size: 15px;
 }
 .single-testimonial:hover {
-  border-color: #fe7a7b;
+  border-color: var(--primary-color);
 }
 .single-testimonial:hover .testimonial-review .quota i {
-  color: #fe7a7b;
+  color: var(--primary-color);
 }
 
 .slick-center .single-testimonial {
-  border-color: #fe7a7b;
+  border-color: var(--primary-color);
 }
 .slick-center .single-testimonial .testimonial-review .quota i {
-  color: #fe7a7b;
+  color: var(--primary-color);
 }
 
 .testimonial-active .slick-dots {
@@ -3990,7 +4010,7 @@ p {
 ===========================*/
 .contact-area {
   padding-top: 60px;
-  padding-bottom: 20px;
+  padding-bottom: 130px;
   background-color: #f4f6f7;
 }
 
@@ -4030,7 +4050,11 @@ p.form-message.error.form-message.error {
 .contact-info .single-contact-info .contact-info-content {
   padding-left: 20px;
 }
-.footer-area.footer-dark .contact-info .single-contact-info .contact-info-content p {
+.footer-area.footer-dark
+  .contact-info
+  .single-contact-info
+  .contact-info-content
+  p {
   color: #fff;
 }
 .contact-info .single-contact-info.contact-color-1 .contact-info-icon i {
@@ -4043,10 +4067,10 @@ p.form-message.error.form-message.error {
   background-color: #005ad5;
 }
 
-.footer-area.footer-dark .contact-wrapper .contact-title {
+.contact-area .contact-wrapper .contact-title {
   font-size: 32px;
   font-weight: 700;
-  color: #fff;
+  color: #000;
 }
 @media (max-width: 767px) {
   .contact-wrapper .contact-title {
@@ -4066,7 +4090,7 @@ p.form-message.error.form-message.error {
 ===========================*/
 /*===== FOOTER FIVE =====*/
 .footer-area {
-  background-color: #f4f6f7;
+  background-color: var(--primary-color);
   padding-bottom: 120px;
 }
 .footer-area .footer-logo a img {
@@ -4218,9 +4242,9 @@ p.form-message.error.form-message.error {
   border-radius: 8px;
   position: relative;
   overflow: hidden;
-  background: -webkit-linear-gradient(135deg, #E3E3E3 0%,#5D6874 100%);
-  background: -o-linear-gradient(135deg, #E3E3E3 0%,#5D6874 100%);
-  background: linear-gradient(135deg, #E3E3E3 0%,#5D6874 100%);
+  background: -webkit-linear-gradient(135deg, #e3e3e3 0%, #5d6874 100%);
+  background: -o-linear-gradient(135deg, #e3e3e3 0%, #5d6874 100%);
+  background: linear-gradient(135deg, #e3e3e3 0%, #5d6874 100%);
 }
 .product-style .pricing-icon img {
   max-width: 100%;
@@ -4283,7 +4307,7 @@ p.form-message.error.form-message.error {
   padding: 25px 0px 5px 0px;
 
   /* "transparent" only works here because == rgba(0,0,0,0) */
-  background-image: linear-gradient(to bottom, transparent, #E3E3E3);
+  background-image: linear-gradient(to bottom, transparent, #e3e3e3);
 }
 .product-style .pricing-btn {
   margin-top: 31px;

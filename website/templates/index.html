@@ -50,10 +50,24 @@
     />
 
     <!--====== Default CSS ======-->
-    <link rel="stylesheet" href="{% static 'assets/css/default.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/default.min.css' %}" />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css?family={{ websiteconfig.primary_font }}:300,400,500,600,700,800");
+      @import url("https://fonts.googleapis.com/css?family={{ websiteconfig.secondary_font }}:300,400,500,600,700,800");
+      :root {
+        --primary-color: {{ websiteconfig.primary_color }};
+      }
+      body {
+        font-family: "{{ websiteconfig.primary_font }}", "{{ websiteconfig.primary_font }}";
+        font-weight: normal;
+        font-style: normal;
+        color: #121212;
+      }
+    </style>
 
     <!--====== Style CSS ======-->
-    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/style.min.css' %}" />
   </head>
 
   <body>
@@ -69,6 +83,8 @@
 
     <div class="preloader">
       <div class="loader">
+        <div class="d-block mt-3 mb-3"><img src="{{ websiteconfig.logo_dark.url }}" /></div>
+        {% if websiteconfig.spinner_style == 2 %}
         <div class="ytp-spinner">
           <div class="ytp-spinner-container">
             <div class="ytp-spinner-rotator">
@@ -81,6 +97,9 @@
             </div>
           </div>
         </div>
+        {% else %}
+        <div class="circonf circonf-6"></div>
+        {% endif %}
       </div>
     </div>
 
@@ -217,7 +236,6 @@
     <script type="text/javascript">
 
       //===== Footer
-      $('.footer-area')[0].style.backgroundColor = '{{ contact.background_color }}';
       {% if contact.is_background_dark %}
       $('.footer-area').addClass('footer-dark');
       {% endif %}

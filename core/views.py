@@ -53,35 +53,54 @@ def contact(request, *args, **kwargs):
     message = "There was a problem with your submission, please try again."
     status = 403
     if request.method == "POST":
-        try:
-            name = strip_tags(
-                request.POST.get('name').strip().replace("\r\n", " ")
-            )
-            from_mail = EmailField().clean(request.POST.get('email').strip())
-            massage = request.POST.get('massage').strip()
-            to_mail = ContactEmail.objects.filter(
-                contact__is_active=True,
-                is_contact_email=True
-            ).only('email').first()
-            if all([name, from_mail, massage]):
-                message = "Oops! Something went wrong and we couldn't send your message.",
-                status = 500
-                if send_mail(
-                    'New contact from ' + name,
-                    'First Name: {}\nEmail: {}\n\nMessage:\n{}\n'.format(
-                        name,
-                        from_mail,
-                        massage
-                    ),
-                    name + ' <' + from_mail + '>',
-                    [to_mail],
-                    fail_silently=False,
-                ):
-                    message = "Thank You! Your message has been sent.",
-                    status = 200
-        except ValidationError as e:
-            message = e
+
+        massage = request.POST.get('massage').strip()
+        if not massage:
+            message = "Please enter your message."
             status = 400
+        elif len(massage) < 4:
+            massage = ''
+            message = "Please enter a valid message."
+            status = 400
+
+        try:
+            from_mail = EmailField().clean(request.POST.get('email').strip())
+        except ValidationError as e:
+            from_mail = ''
+            message = "Email: {}".format(', '.join(e.messages))
+            status = 400
+
+        name = strip_tags(
+            request.POST.get('name').strip().replace("\r\n", " ")
+        )
+        if not name:
+            message = "Name is required."
+            status = 400
+        elif len(name) < 4:
+            name = ''
+            message = "Please enter a valid name."
+            status = 400
+
+        to_mail = ContactEmail.objects.filter(
+            contact__is_active=True,
+            is_contact_email=True
+        ).only('email').first()
+        if all([name, from_mail, massage]):
+            message = "Oops! Something went wrong and we couldn't send your message.",
+            status = 500
+            if send_mail(
+                'New contact from ' + name,
+                'First Name: {}\nEmail: {}\n\nMessage:\n{}\n'.format(
+                    name,
+                    from_mail,
+                    massage
+                ),
+                name + ' <' + from_mail + '>',
+                [to_mail],
+                fail_silently=False,
+            ):
+                message = "Thank You! Your message has been sent.",
+                status = 200
     return HttpResponse(
         message,
         status=status
