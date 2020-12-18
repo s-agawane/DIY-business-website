@@ -3801,7 +3801,10 @@ p {
   color: #ffc107;
 }
 .single-testimonial .testimonial-text {
-  overflow-wrap: break-word;
+  display: inline-block;
+  word-break: break-word;
+  min-height: 13rem;
+  max-height: 13rem;
   margin-top: 25px;
 }
 .single-testimonial .testimonial-author {
