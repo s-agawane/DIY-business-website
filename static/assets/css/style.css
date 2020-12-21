@@ -4061,13 +4061,13 @@ p.form-message.error.form-message.error {
   color: #fff;
 }
 .contact-info .single-contact-info.contact-color-1 .contact-info-icon i {
-  background-color: #121212;
+  background-color: var(--primary-color);
 }
 .contact-info .single-contact-info.contact-color-2 .contact-info-icon i {
-  background-color: #fc3832;
+  background-color: var(--primary-color);
 }
 .contact-info .single-contact-info.contact-color-3 .contact-info-icon i {
-  background-color: #005ad5;
+  background-color: var(--primary-color);
 }
 
 .contact-area .contact-wrapper .contact-title {
@@ -4245,12 +4245,13 @@ p.form-message.error.form-message.error {
   border-radius: 8px;
   position: relative;
   overflow: hidden;
-  background: -webkit-linear-gradient(135deg, #e3e3e3 0%, #5d6874 100%);
-  background: -o-linear-gradient(135deg, #e3e3e3 0%, #5d6874 100%);
-  background: linear-gradient(135deg, #e3e3e3 0%, #5d6874 100%);
 }
 .product-style .pricing-icon img {
   max-width: 100%;
+}
+.product-style .pricing-header {
+  max-height: 6rem;
+  min-height: 6rem;
 }
 .product-style .pricing-header .sub-title {
   font-size: 25px;
@@ -4272,7 +4273,7 @@ p.form-message.error.form-message.error {
   vertical-align: middle;
   font-weight: 600;
   line-height: 45px;
-  color: black;
+  color: var(--primary-color);
   margin-top: 8px;
 }
 .product-style .pricing-header .month .strike {
